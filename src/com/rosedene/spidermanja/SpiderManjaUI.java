@@ -87,6 +87,7 @@ public class SpiderManjaUI extends javax.swing.JFrame {
             }
         });
 
+        jPanelExpected.setBackground(new java.awt.Color(51, 255, 102));
         jPanelExpected.setBorder(javax.swing.BorderFactory.createTitledBorder("Expected"));
 
         jListExpected.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -112,19 +113,27 @@ public class SpiderManjaUI extends javax.swing.JFrame {
             .addComponent(jScrollPane1)
         );
 
+        jPanelStatus.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabelStatus.setText("A Status Line (useful for design messages)");
+
         javax.swing.GroupLayout jPanelStatusLayout = new javax.swing.GroupLayout(jPanelStatus);
         jPanelStatus.setLayout(jPanelStatusLayout);
         jPanelStatusLayout.setHorizontalGroup(
             jPanelStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanelStatusLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelStatus)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelStatusLayout.setVerticalGroup(
             jPanelStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 23, Short.MAX_VALUE)
+            .addGroup(jPanelStatusLayout.createSequentialGroup()
+                .addComponent(jLabelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jLabelStatus.setText("Status:");
-
+        jPanelExceeding.setBackground(new java.awt.Color(255, 204, 255));
         jPanelExceeding.setBorder(javax.swing.BorderFactory.createTitledBorder("Exceeding"));
 
         jListExceeding.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -150,6 +159,7 @@ public class SpiderManjaUI extends javax.swing.JFrame {
             .addComponent(jScrollPane2)
         );
 
+        jPanelEmerging.setBackground(new java.awt.Color(204, 255, 204));
         jPanelEmerging.setBorder(javax.swing.BorderFactory.createTitledBorder("Emerging"));
 
         jListEmerging.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -172,9 +182,10 @@ public class SpiderManjaUI extends javax.swing.JFrame {
         );
         jPanelEmergingLayout.setVerticalGroup(
             jPanelEmergingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
         );
 
+        jPanelBelow.setBackground(new java.awt.Color(255, 255, 204));
         jPanelBelow.setBorder(javax.swing.BorderFactory.createTitledBorder("Below"));
 
         jListBelow.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -297,19 +308,15 @@ public class SpiderManjaUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelStatus)
+                .addComponent(jPanelBelow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelBelow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelEmerging, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelEmerging, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelExpected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelExpected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelExceeding, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelExceeding, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jPanelStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,25 +327,26 @@ public class SpiderManjaUI extends javax.swing.JFrame {
                     .addComponent(jPanelEmerging, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanelBelow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelStatus)))
+                .addComponent(jPanelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuFileImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileImportActionPerformed
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files (Tab separated from SIMS)", "txt", "text");
         jFileChooser.setFileFilter(filter);
-        jFileChooser.setDialogTitle("Import from text file");
+        jFileChooser.setDialogTitle("Import from a SIMS text file");
         int returnVal = jFileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = jFileChooser.getSelectedFile();
             try {
                 CSVReader reader = new CSVReader(new FileReader(file.getAbsolutePath()), '\t');
                 String [] nextLine;
+                belowPupils.clear();
+                emergingPupils.clear();
                 expectedPupils.clear();
+                exceedingPupils.clear();
                 try {
                     while ((nextLine = reader.readNext()) != null) {
                         // nextLine[] is an array of values from the line
@@ -348,7 +356,7 @@ public class SpiderManjaUI extends javax.swing.JFrame {
                 } catch (IOException ex) {
                     Logger.getLogger(SpiderManjaUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                jListExpected.setModel(expectedPupils);
+                //jListExpected.setModel(expectedPupils);
             } catch (SecurityException | FileNotFoundException ex) {
                 System.out.println("problem accessing file" + file.getAbsolutePath());
             }
@@ -587,9 +595,16 @@ public class SpiderManjaUI extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        String lcOSName = System.getProperty("os.name").toLowerCase();
+        boolean IS_MAC = lcOSName.startsWith("mac os x");
+        String tryToFind = "Nimbus";
+        if (IS_MAC) {
+            tryToFind = "Mac OS X";
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
+        }
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if (tryToFind.equals(info.getName())){
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
