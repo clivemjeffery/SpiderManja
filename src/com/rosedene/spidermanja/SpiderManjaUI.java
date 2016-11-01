@@ -211,8 +211,11 @@ public class SpiderManjaUI extends javax.swing.JFrame {
             .addComponent(jScrollPane4)
         );
 
+        jMenuFile.setMnemonic('F');
         jMenuFile.setText("File");
 
+        jMenuFileOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, 0));
+        jMenuFileOpen.setMnemonic('O');
         jMenuFileOpen.setText("Open...");
         jMenuFileOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,7 +224,9 @@ public class SpiderManjaUI extends javax.swing.JFrame {
         });
         jMenuFile.add(jMenuFileOpen);
 
+        jMenuFileSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, 0));
         jMenuFileSave.setText("Save");
+        jMenuFileSave.setEnabled(false);
         jMenuFileSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuFileSaveActionPerformed(evt);
@@ -229,6 +234,8 @@ public class SpiderManjaUI extends javax.swing.JFrame {
         });
         jMenuFile.add(jMenuFileSave);
 
+        jMenuFileSaveAs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, 0));
+        jMenuFileSaveAs.setMnemonic('A');
         jMenuFileSaveAs.setText("Save As...");
         jMenuFileSaveAs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,6 +245,8 @@ public class SpiderManjaUI extends javax.swing.JFrame {
         jMenuFile.add(jMenuFileSaveAs);
         jMenuFile.add(jSeparator1);
 
+        jMenuFileImport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, 0));
+        jMenuFileImport.setMnemonic('I');
         jMenuFileImport.setText("Import...");
         jMenuFileImport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,7 +256,9 @@ public class SpiderManjaUI extends javax.swing.JFrame {
         jMenuFile.add(jMenuFileImport);
         jMenuFile.add(jSeparator2);
 
-        jMenuExit.setText("Exit");
+        jMenuExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuExit.setMnemonic('Q');
+        jMenuExit.setText("Quit");
         jMenuExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuExitActionPerformed(evt);
@@ -339,10 +350,12 @@ public class SpiderManjaUI extends javax.swing.JFrame {
         jFileChooser.setDialogTitle("Import from a SIMS text file");
         int returnVal = jFileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = jFileChooser.getSelectedFile();
+            importFile = jFileChooser.getSelectedFile();
             try {
-                CSVReader reader = new CSVReader(new FileReader(file.getAbsolutePath()), '\t');
+                CSVReader reader = new CSVReader(new FileReader(importFile.getAbsolutePath()), '\t');
                 String [] nextLine;
+                spiderFile = null; // clear spiderFile (to avoid saving over another class)
+                jMenuFileSave.setEnabled(false); // and disable menu (do with listener?)
                 belowPupils.clear();
                 emergingPupils.clear();
                 expectedPupils.clear();
@@ -353,12 +366,13 @@ public class SpiderManjaUI extends javax.swing.JFrame {
                         System.out.println(nextLine[2] + '\t' + nextLine[3]);
                         expectedPupils.addElement(new Pupil(nextLine));
                     }
+                    setTitle("Imported from: " + importFile.getAbsolutePath());
                 } catch (IOException ex) {
                     Logger.getLogger(SpiderManjaUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 //jListExpected.setModel(expectedPupils);
             } catch (SecurityException | FileNotFoundException ex) {
-                System.out.println("problem accessing file" + file.getAbsolutePath());
+                System.out.println("problem accessing file" + importFile.getAbsolutePath());
             }
         } else {
             System.out.println("File access cancelled by user.");
@@ -390,6 +404,8 @@ public class SpiderManjaUI extends javax.swing.JFrame {
                 jListExpected.setModel(expectedPupils);
                 jListExceeding.setModel(exceedingPupils);
 		ois.close();
+                setTitle(spiderFile.getAbsolutePath());
+                jMenuFileSave.setEnabled(true);
             } catch (SecurityException ex) {
                 System.out.println("problem accessing file" + spiderFile.getAbsolutePath());
             } catch (FileNotFoundException ex) {
@@ -547,7 +563,7 @@ public class SpiderManjaUI extends javax.swing.JFrame {
                     Logger.getLogger(SpiderManjaUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                // !warn overwrite?
+                // Warn about overwriting?
             }
             FileOutputStream fos = new FileOutputStream(spiderFile.getAbsolutePath());
             try {
@@ -557,6 +573,8 @@ public class SpiderManjaUI extends javax.swing.JFrame {
                 oos.writeObject(expectedPupils);
                 oos.writeObject(exceedingPupils);
                 oos.close();
+                setTitle(spiderFile.getAbsolutePath());
+                jMenuFileSave.setEnabled(true);
             } catch (IOException ex) {
                 Logger.getLogger(SpiderManjaUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -595,28 +613,8 @@ public class SpiderManjaUI extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        String lcOSName = System.getProperty("os.name").toLowerCase();
-        boolean IS_MAC = lcOSName.startsWith("mac os x");
-        String tryToFind = "Nimbus";
-        if (IS_MAC) {
-            tryToFind = "Mac OS X";
-            System.setProperty("apple.laf.useScreenMenuBar", "true");
-        }
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if (tryToFind.equals(info.getName())){
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SpiderManjaUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SpiderManjaUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SpiderManjaUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SpiderManjaUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                System.out.println(info.getClassName());
         }
         //</editor-fold>
 
@@ -630,6 +628,7 @@ public class SpiderManjaUI extends javax.swing.JFrame {
     
     // Model variable(s)
     private File spiderFile; // working file in serialisation format
+    private File importFile; // original text file import / SIMS report output
     // models for each type of assessment list
     private DefaultListModel<Pupil> belowPupils = new DefaultListModel<>();
     private DefaultListModel<Pupil> emergingPupils = new DefaultListModel<>();

@@ -11,11 +11,16 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenuFile">
           <Properties>
+            <Property name="mnemonic" type="int" value="70"/>
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuFileOpen">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="O"/>
+                </Property>
+                <Property name="mnemonic" type="int" value="79"/>
                 <Property name="text" type="java.lang.String" value="Open..."/>
               </Properties>
               <Events>
@@ -24,7 +29,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuFileSave">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="S"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Save"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuFileSaveActionPerformed"/>
@@ -32,6 +41,10 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuFileSaveAs">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="A"/>
+                </Property>
+                <Property name="mnemonic" type="int" value="65"/>
                 <Property name="text" type="java.lang.String" value="Save As..."/>
               </Properties>
               <Events>
@@ -42,6 +55,10 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuFileImport">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="I"/>
+                </Property>
+                <Property name="mnemonic" type="int" value="73"/>
                 <Property name="text" type="java.lang.String" value="Import..."/>
               </Properties>
               <Events>
@@ -52,7 +69,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuExit">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Exit"/>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+Q"/>
+                </Property>
+                <Property name="mnemonic" type="int" value="81"/>
+                <Property name="text" type="java.lang.String" value="Quit"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuExitActionPerformed"/>
